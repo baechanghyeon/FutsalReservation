@@ -123,8 +123,7 @@ const BoardInfo = styled.div`
 
   a {
     &:hover {
-      color: #3563e9;
-      opacity: 0.7;
+      opacity: 0.5;
     }
   }
 `;

@@ -28,25 +28,28 @@ const Router = () => (
       <Routes>
         {/* GlobalLayout -> Header + Footer */}
         <Route element={<GlobalLayout />}>
-          {/* 인증 여부 상관없이 접속 가능한 페이지 정의 */}
+          {/* 인증 여부 상관없이 접속 가능한 페이지 정의 (비로그인) */}
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/grounds/:id' element={<Ground />} />
-          <Route path='/pointCharge' element={<PointCharge />} />
           <Route path='/signup' element={<SignUp />} />
-          <Route path='/admin' element={<Admin />} />
           <Route path='/board' element={<Board />} />
-          <Route path='/myinfo' element={<MyPage />}>
-            <Route path='' element={<RentalManagement />} />
-            <Route path='change' element={<UserInfoChange />} />
-            <Route path='password' element={<PasswordChange />} />
-            <Route path='withdrawal' element={<UnRegister />} />
-            <Route path='point' element={<UserPointHistory />} />
-          </Route>
-          {/* 인증을 반드시 해야지만 접속 가능한 페이지 정의 */}
+          <Route path='/pointCharge' element={<PointCharge />} />
+          {/* 인증을 반드시 해야지만 접속 가능한 페이지 정의 (로그인) */}
           <Route element={<PrivateRoute />}>
             <Route path='/write' element={<BoardWrite />} />
             <Route path='/board/:boardId' element={<BoardDetail />} />
+            <Route path='/myinfo' element={<MyPage />}>
+              <Route path='' element={<RentalManagement />} />
+              <Route path='change' element={<UserInfoChange />} />
+              <Route path='password' element={<PasswordChange />} />
+              <Route path='withdrawal' element={<UnRegister />} />
+              <Route path='point' element={<UserPointHistory />} />
+            </Route>
+          </Route>
+          {/* 관리자만 접근이 가능한 페이지 정의 */}
+          <Route element={<PrivateRoute adminAuth />}>
+            <Route path='/admin' element={<Admin />} />
           </Route>
         </Route>
         <Route
