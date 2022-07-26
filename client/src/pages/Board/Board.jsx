@@ -6,6 +6,7 @@ import { useRecoilState } from 'recoil';
 import { boardListState, boardPageState } from 'stores/boardStore';
 import Pagination from 'components/organisms/Pagination';
 import Button from 'components/atoms/Button';
+import { isExistToken } from 'util/useful-functions';
 
 const Board = () => {
   const [boardList, setBoardList] = useRecoilState(boardListState);
@@ -60,9 +61,11 @@ const Board = () => {
             page={page}
             setPage={setPage}
           />
-          <Link to='/write'>
-            <StyledButton>글 작성</StyledButton>
-          </Link>
+          {isExistToken() && (
+            <Link to='/write'>
+              <StyledButton>글 작성</StyledButton>
+            </Link>
+          )}
         </Footer>
       )}
     </>
